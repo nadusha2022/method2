@@ -16,37 +16,28 @@ public class Main {
 
     }
 
-    private static void checkPhone(int clientDeviceYear, int clientOS) {
-        if (clientOS == 0 && clientDeviceYear < 2015) {
-            System.out.println("Установите полную версию приложения для iOS по ссылке");
+    private static void checkPhone(int productionYear, int clientOS) {
+        if (clientOS <= 1 && productionYear <= 2015) {
             System.out.println("Установите облегченную версию приложения для iOS по ссылке");
-        } else if (clientOS == 0) {
-            System.out.println("Установите полную версию приложения для iOS по ссылке");
-        }
-        if (clientOS == 1 && clientDeviceYear < 2015) {
-            System.out.println("Установите версию приложения для Android по ссылке");
-            System.out.println("Установите облегченную версию приложения для Android по ссылке");
-        } else if (clientOS == 1) {
-            System.out.println("Установите версию приложения для Android по ссылке");
-        }
-    }
-
-    private static void checkDelivery(int deliveryDistance) {
-        int deliveryTime = 1;
-        if (deliveryDistance < 20) {
-            System.out.println("На доставку потребуется " + deliveryDistance + " дня");
-        } else if (deliveryDistance >= 20 && deliveryDistance < 60) {
-            deliveryTime = deliveryTime + 1;
-            System.out.println("На доставку потребуется " + deliveryTime + " дня");
-        } else if (deliveryDistance >= 60 || deliveryDistance <= 100) {
-            deliveryTime = deliveryTime + 2;
-            System.out.println("На доставку потребуется " + deliveryTime + " дня");
         } else {
-            System.out.println("Доставки нет");
-
+            System.out.println("Установите облегченную версию приложения для Android по ссылке");
+        } if (productionYear > 2014) {
+            System.out.println("Для пользователей телефонов " + productionYear +
+                    " года выпуска и позже необходимо установить версии приложений для Android и IOS по ссылке");
         }
     }
 
+    private static int Days(int kilometer) {
+        if (kilometer >= 0 && kilometer <= 20) {
+            return 1;
+        } else if (kilometer > 20 && kilometer <= 60) {
+            return 2;
+        } else if (kilometer > 60 || kilometer <= 100) {
+            return 3;
+        } else {
+            return - 1;
+        }
+    }
 
     public static void task1() {
         System.out.println("Задача 1");
@@ -55,12 +46,18 @@ public class Main {
 
     public static void task2() {
         System.out.println("Задача 2");
-        checkPhone(2016, 0);
+        checkPhone(2016, 1);
     }
 
     public static void task3() {
         System.out.println("Задача 3");
-        checkDelivery(55);
+        int kilometer = 110;
+        int days = Days(kilometer);
+        if (days == -1){
+            System.out.println("Доставка невозможна на растояние " + kilometer + " киллометров");
+        } else {
+            System.out.println("Время доставки " + days + " дн.");
+        }
     }
 }
 
